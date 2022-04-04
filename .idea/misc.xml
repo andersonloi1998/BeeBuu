@@ -4,9 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/ander/AndroidStudioProjects/BeeBuu/app/src/main/res/drawable-v24/side_nav_bar.xml" value="0.121" />
+        <entry key="..\:/Users/ander/AndroidStudioProjects/BeeBuu/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.121" />
+        <entry key="..\:/Users/ander/AndroidStudioProjects/BeeBuu/app/src/main/res/drawable/side_nav_bar.xml" value="0.121" />
+        <entry key="..\:/Users/ander/AndroidStudioProjects/BeeBuu/app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="..\:/Users/ander/AndroidStudioProjects/BeeBuu/app/src/main/res/layout/activity_main.xml" value="0.2359375" />
         <entry key="..\:/Users/ander/AndroidStudioProjects/BeeBuu/app/src/main/res/layout/activity_sign_in.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/ander/AndroidStudioProjects/BeeBuu/app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
+        <entry key="..\:/Users/ander/AndroidStudioProjects/BeeBuu/app/src/main/res/layout/app_bar_home.xml" value="0.25" />
+        <entry key="..\:/Users/ander/AndroidStudioProjects/BeeBuu/app/src/main/res/layout/content_home.xml" value="0.25" />
+        <entry key="..\:/Users/ander/AndroidStudioProjects/BeeBuu/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/ander/AndroidStudioProjects/BeeBuu/app/src/main/res/layout/menu_item.xml" value="0.25" />
+        <entry key="..\:/Users/ander/AndroidStudioProjects/BeeBuu/app/src/main/res/layout/nav_header_home.xml" value="0.25" />
+        <entry key="..\:/Users/ander/AndroidStudioProjects/BeeBuu/app/src/main/res/menu/activity_main_drawer.xml" value="0.25" />
+        <entry key="..\:/Users/ander/AndroidStudioProjects/BeeBuu/app/src/main/res/menu/home.xml" value="0.1" />
       </map>
     </option>
   </component>

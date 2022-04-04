@@ -1,4 +1,4 @@
-package com.example.beebuu.model;
+package com.example.beebuu.Model;
 
 public class User {
     private String Name;
