@@ -61,8 +61,8 @@ public class SignIn extends AppCompatActivity {
                             }
                         }
                         else
-                            mDialog.dismiss();
                         {
+                            mDialog.dismiss();
                             Toast.makeText(SignIn.this, "USER NOT EXIST !!!", Toast.LENGTH_SHORT).show();
                         }
                     }
