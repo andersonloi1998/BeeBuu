@@ -83,6 +83,7 @@ public class Cart extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT
         );
         edtAddress.setLayoutParams(lp);
+
         alertDialog.setView(edtAddress); //Add edit Text to alert dialog
         alertDialog.setIcon(R.drawable.ic_baseline_shopping_cart_24);
 

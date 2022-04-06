@@ -37,10 +37,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
-public class Home extends AppCompatActivity {
-
-    private AppBarConfiguration mAppBarConfiguration;
-    private ActivityHomeBinding binding;
+public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     FirebaseDatabase database;
     DatabaseReference category;
@@ -52,9 +49,7 @@ public class Home extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        binding = ActivityHomeBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_home);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Menu");
@@ -64,25 +59,23 @@ public class Home extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         category = database.getReference("Category");
 
-        binding.appBarHome.fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent cartIntent = new Intent(Home.this,Cart.class);
+                Intent cartIntent = new Intent(Home.this, Cart.class);
                 startActivity(cartIntent);
             }
         });
 
-        DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
-                .setOpenableLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+        DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         //Set Name for User
         View headerView = navigationView.getHeaderView(0);
@@ -114,9 +107,9 @@ public class Home extends AppCompatActivity {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
                         //Get CategoryID and send to new FoodList Activity
-                        Intent foodList = new Intent(Home.this,FoodList.class);
+                        Intent foodList = new Intent(Home.this, FoodList.class);
                         //Get Key = CategoryID
-                        foodList.putExtra("CategoryId",adapter.getRef(position).getKey());
+                        foodList.putExtra("CategoryId", adapter.getRef(position).getKey());
                         startActivity(foodList);
                     }
                 });
@@ -142,10 +135,26 @@ public class Home extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
+    @SuppressWarnings("StatementWithEmptyBody")
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_menu) {
+
+        } else if (id == R.id.nav_cart) {
+            Intent cartIntent = new Intent(Home.this,Cart.class);
+            startActivity(cartIntent);
+        } else if (id == R.id.nav_order) {
+            Intent orderIntent = new Intent(Home.this, OrderStatus.class);
+            startActivity(orderIntent);
+        } else if(id == R.id.nav_log_out) {
+            Intent signIn = new Intent(Home.this,SignIn.class);
+            signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(signIn);
+        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
