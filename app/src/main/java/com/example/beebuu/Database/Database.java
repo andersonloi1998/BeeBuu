@@ -22,14 +22,15 @@ public class Database extends SQLiteAssetHelper{
     public List<Order> getCarts(){
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-
         String[] sqlSelect = {"ProductName","ProductId","Quantity","Price","Discount"};
+
         String sqlTable="OrderDetail";
 
         qb.setTables(sqlTable);
         Cursor c = qb.query(db,sqlSelect,null,null,null,null,null);
 
         final List<Order> result = new ArrayList<>();
+
         if(c.moveToFirst()){
             do{
                 result.add(new Order(c.getString(c.getColumnIndexOrThrow("ProductId")),
@@ -39,7 +40,9 @@ public class Database extends SQLiteAssetHelper{
                         c.getString(c.getColumnIndexOrThrow("Discount"))
                 ));
             }while(c.moveToNext());
+            c.close();
         }
+        db.close();
         return result;
     }
 
@@ -52,11 +55,26 @@ public class Database extends SQLiteAssetHelper{
                 order.getPrice(),
                 order.getDiscount());
         db.execSQL(query);
+        db.close();
     }
 
     public void cleanCart() {
         SQLiteDatabase db = getReadableDatabase();
         String query = String.format("DELETE FROM OrderDetail");
         db.execSQL(query);
+        db.close();
+    }
+
+    public int getCountCart() {
+        int count = 0;
+        SQLiteDatabase db = getReadableDatabase();
+        String query = String.format("SELECT COUNT(*) FROM OrderDetail");
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor.moveToFirst()){
+            do{
+                count = cursor.getInt(0);
+            }while (cursor.moveToNext());
+        }
+        return count;
     }
 }

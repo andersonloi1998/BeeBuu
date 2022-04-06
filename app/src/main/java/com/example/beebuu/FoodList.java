@@ -62,7 +62,7 @@ public class FoodList extends AppCompatActivity {
                 R.layout.food_item,
                 FoodViewHolder.class,
                 foodList.orderByChild("menuId").equalTo(categoryId))
-            //like: select * from foods where MenuId = x
+            //like: select * from foods where menuId = x
         {
             @Override
             protected void populateViewHolder(FoodViewHolder foodViewHolder, Food food, int i) {

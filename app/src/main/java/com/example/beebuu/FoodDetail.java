@@ -32,11 +32,10 @@ public class FoodDetail extends AppCompatActivity {
     ElegantNumberButton numberButton;
 
     String foodId="";
+    Food currentFood;
 
     FirebaseDatabase database;
     DatabaseReference foods;
-
-    Food currentFood;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
