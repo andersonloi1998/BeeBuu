@@ -114,15 +114,17 @@
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
-                        <com.travijuu.numberpicker.library.NumberPicker
+                        <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
                             android:id="@+id/number_button"
                             android:layout_width="140dp"
-                            android:layout_height="40dp"
+                            android:layout_height="50dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginLeft="8dp"
                             android:layout_marginBottom="18dp"
-                            app:max="10"
-                            app:min="1" />
+                            app:textSize="8sp"
+                            app:backGroundColor="@color/colorAccent"
+                            app:initialNumber="1"
+                            app:finalNumber="20"/>
 
                     </LinearLayout>
                 </LinearLayout>

@@ -4,6 +4,8 @@ buildscript {
     repositories {
         google()  // Google's Maven repository
 
+        maven { url 'https://jitpack.io' }
+
     }
     dependencies {
         classpath 'com.google.gms:google-services:4.3.10'
@@ -19,9 +21,12 @@ allprojects {
     repositories {
         // Check that you have the following line (if not, add it):
         google()  // Google's Maven repository
+        jcenter()
+        maven { url 'https://jitpack.io' }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
