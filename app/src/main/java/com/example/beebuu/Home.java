@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.beebuu.Common.Common;
 import com.example.beebuu.Interface.ItemClickListener;
 import com.example.beebuu.Model.Category;
+import com.example.beebuu.Service.ListenOrder;
 import com.example.beebuu.Viewholder.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -89,6 +90,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         recycler_menu.setLayoutManager(layoutManager);
 
         loadMenu();
+
+        //Register Service
+        Intent service = new Intent(Home.this, ListenOrder.class);
+        startService(service);
     }
 
     private void loadMenu() {
@@ -135,7 +140,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         return true;
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();

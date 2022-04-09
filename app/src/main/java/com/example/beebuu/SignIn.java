@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -17,19 +16,22 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.rengwuxian.materialedittext.MaterialEditText;
+
+import info.hoang8f.widget.FButton;
 
 public class SignIn extends AppCompatActivity {
 
-    EditText edtPassword,edtPhone;
-    Button btnSignIn;
+    MaterialEditText edtPassword,edtPhone;
+    FButton btnSignIn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        edtPassword = (EditText)findViewById(R.id.edtPassword);
-        edtPhone = (EditText) findViewById(R.id.edtPhone);
-        btnSignIn = (Button) findViewById(R.id.btnSignIn);
+        edtPassword = (MaterialEditText) findViewById(R.id.edtPassword);
+        edtPhone = (MaterialEditText) findViewById(R.id.edtPhone);
+        btnSignIn = (FButton) findViewById(R.id.btnSignIn);
 
         //Init Firebase
         final FirebaseDatabase database = FirebaseDatabase.getInstance();

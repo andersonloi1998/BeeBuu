@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Button
+        <info.hoang8f.widget.FButton
             android:id="@+id/btnSignUp"
             android:text="SignUp"
             android:textColor="@android:color/white"
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"/>
 
-        <Button
+        <info.hoang8f.widget.FButton
             android:id="@+id/btnSignIn"
             android:text="SignIn"
             android:textColor="@android:color/white"

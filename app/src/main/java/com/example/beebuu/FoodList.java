@@ -44,7 +44,7 @@ public class FoodList extends AppCompatActivity {
     FirebaseRecyclerAdapter<Food, FoodViewHolder> adapter;
 
     //Search Function
-    FirebaseRecyclerAdapter<Food,FoodViewHolder> searchAdapter;
+    FirebaseRecyclerAdapter<Food, FoodViewHolder> searchAdapter;
     List<String> suggestList = new ArrayList<>();
     MaterialSearchBar materialSearchBar;
 
@@ -73,6 +73,7 @@ public class FoodList extends AppCompatActivity {
         //Search
         materialSearchBar = (MaterialSearchBar) findViewById(R.id.searchBar);
         materialSearchBar.setHint("Enter your food");
+        //materialSearchBar.setSpeechMode(false); //Pre-defined in xml
         loadSuggest();//write function to load suggest from firebase
         materialSearchBar.setLastSuggestions(suggestList);
         materialSearchBar.setCardViewElevation(10);
@@ -91,6 +92,7 @@ public class FoodList extends AppCompatActivity {
                     if(search.toLowerCase().contains(materialSearchBar.getText().toLowerCase()))
                         suggest.add(search);
                 }
+                materialSearchBar.setLastSuggestions(suggest);
             }
 
             @Override
@@ -98,7 +100,6 @@ public class FoodList extends AppCompatActivity {
 
             }
         });
-
         materialSearchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
             @Override
             public void onSearchStateChanged(boolean enabled) {
@@ -137,18 +138,15 @@ public class FoodList extends AppCompatActivity {
                         .into(foodViewHolder.food_image);
 
                 final Food local = food;
-                foodViewHolder.setItemClickListener(new ItemClickListener() {
-                    @Override
-                    public void onClick(View view, int position, boolean isLongClick) {
-                        //Start new Activity
-                        Intent foodDetail = new Intent(FoodList.this,FoodDetail.class);
-                        foodDetail.putExtra("FoodId",searchAdapter.getRef(position).getKey());//Send FoodId to new Activity
-                        startActivity(foodDetail);
-                    }
+                foodViewHolder.setItemClickListener((view, position, isLongClick) -> {
+                    //Start new Activity
+                    Intent foodDetail = new Intent(FoodList.this,FoodDetail.class);
+                    foodDetail.putExtra("FoodId",searchAdapter.getRef(position).getKey());//Send FoodId to new Activity
+                    startActivity(foodDetail);
                 });
             }
         };
-        recyclerView.setAdapter(searchAdapter);
+        recyclerView.setAdapter(searchAdapter); //Set adapter as search result for recyclerview
     }
 
     private void loadSuggest() {

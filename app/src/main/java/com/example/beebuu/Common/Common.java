@@ -12,6 +12,16 @@ public class Common {
     public static String USER_KEY = "User";
     public static String PWD_KEY = "Password";
 
+
+    public static String convertCodeToStatus(String status){
+        if(status.equals("0"))
+            return "Ordered!";
+        else if(status.equals("1"))
+            return "On the way!!!";
+        else
+            return "Shipped!";
+    }
+
     public static boolean isConnectedToInternet(Context context){
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(context.CONNECTIVITY_SERVICE);
         if(connectivityManager != null){

@@ -37,10 +37,14 @@ public class OrderStatus extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        loadOrder(Common.currentUser.getPhone());
+        //loadOrder by phone from Common
+        if(getIntent() != null)
+            loadOrders(Common.currentUser.getPhone());
+        else
+            loadOrders(getIntent().getStringExtra("userPhone"));
     }
 
-    private void loadOrder(String phone) {
+    private void loadOrders(String phone) {
         adapter = new FirebaseRecyclerAdapter<Request, OrderViewHolder>(
                 Request.class,
                 R.layout.order_layout,
@@ -51,7 +55,7 @@ public class OrderStatus extends AppCompatActivity {
             @Override
             protected void populateViewHolder(OrderViewHolder orderViewHolder, Request request, int i) {
                 orderViewHolder.txtOrderId.setText(adapter.getRef(i).getKey());
-                //orderViewHolder.txtOrderStatus.setText(convertCodeToStatus(request.getStatus()));
+                orderViewHolder.txtOrderStatus.setText(Common.convertCodeToStatus(request.getStatus()));
                 orderViewHolder.txtOrderAddress.setText(request.getAddress());
                 orderViewHolder.txtOrderPhone.setText(Common.currentUser.getPhone());
 
@@ -60,12 +64,4 @@ public class OrderStatus extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    private String convertCodeToStatus(String status){
-        if(status.equals("0"))
-            return "Order Placed!";
-        else if(status.equals("1"))
-            return "Food on the way!!!";
-        else
-            return "Food received!";
-    }
 }

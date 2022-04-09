@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,6 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import info.hoang8f.widget.FButton;
+
 public class Cart extends AppCompatActivity {
 
     RecyclerView recyclerView;
@@ -37,7 +38,7 @@ public class Cart extends AppCompatActivity {
     DatabaseReference requests;
 
     TextView txtTotalPrice;
-    Button btnPlace;
+    FButton btnPlace;
 
     List<Order> cart = new ArrayList<>();
 
@@ -59,13 +60,13 @@ public class Cart extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         txtTotalPrice = (TextView)findViewById(R.id.total);
-        btnPlace = (Button)findViewById(R.id.btnPlaceOrder);
+        btnPlace = (FButton)findViewById(R.id.btnPlaceOrder);
 
         btnPlace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showAlertDialog();
-                ;
+
             }
         });
 
