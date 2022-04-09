@@ -129,7 +129,7 @@ public class FoodList extends AppCompatActivity {
                 Food.class,
                 R.layout.food_item,
                 FoodViewHolder.class,
-                foodList.orderByChild("Name").equalTo(text.toString())//Compare name
+                foodList.orderByChild("name").equalTo(text.toString())//Compare name
         ){
             @Override
             protected void populateViewHolder(FoodViewHolder foodViewHolder, Food food, int i) {
@@ -150,7 +150,7 @@ public class FoodList extends AppCompatActivity {
     }
 
     private void loadSuggest() {
-        foodList.orderByChild("MenuId").equalTo(categoryId)
+        foodList.orderByChild("menuId").equalTo(categoryId)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
