@@ -9,16 +9,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.beebuu.Common.Common;
+import com.example.beebuu.Database.Database;
 import com.example.beebuu.Interface.ItemClickListener;
-import com.example.beebuu.Model.Category;
 import com.example.beebuu.Model.Food;
 import com.example.beebuu.Viewholder.FoodViewHolder;
-import com.example.beebuu.Viewholder.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,7 +28,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class FoodList extends AppCompatActivity {
 
@@ -49,6 +46,9 @@ public class FoodList extends AppCompatActivity {
     List<String> suggestList = new ArrayList<>();
     MaterialSearchBar materialSearchBar;
 
+    //Favourites
+    Database localDB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +57,9 @@ public class FoodList extends AppCompatActivity {
         //Firebase Init
         database = FirebaseDatabase.getInstance();
         foodList = database.getReference("Foods");
+
+        //Local DB
+        localDB = new Database(this);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_food);
         recyclerView.setHasFixedSize(true);
@@ -186,6 +189,29 @@ public class FoodList extends AppCompatActivity {
                 foodViewHolder.food_name.setText(food.getName());
                 Picasso.with(getBaseContext()).load(food.getImage())
                         .into(foodViewHolder.food_image);
+
+                //Add favourites
+                if(localDB.isFavourite(adapter.getRef(i).getKey()))
+                    foodViewHolder.fav_image.setImageResource(R.drawable.ic_baseline_favorite_24);
+
+                //Click to change status of favourites
+                foodViewHolder.fav_image.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(!localDB.isFavourite(adapter.getRef(i).getKey()))
+                        {
+                            localDB.addToFavourites(adapter.getRef(i).getKey());
+                            foodViewHolder.fav_image.setImageResource(R.drawable.ic_baseline_favorite_24);
+                            Toast.makeText(FoodList.this, ""+food.getName()+"was added to favourites", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            localDB.removeFromFavourites(adapter.getRef(i).getKey());
+                            foodViewHolder.fav_image.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                            Toast.makeText(FoodList.this, ""+food.getName()+"was removed from favourites", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
                 final Food local = food;
                 foodViewHolder.setItemClickListener(new ItemClickListener() {
