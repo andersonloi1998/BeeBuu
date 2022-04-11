@@ -5,14 +5,24 @@ public class User {
     private String Password;
     private String Phone;
     private String IsStaff;
+    private String SecureCode;
 
     public User() {
     }
 
-    public User(String name, String password) {
+    public String getSecureCode() {
+        return SecureCode;
+    }
+
+    public void setSecureCode(String secureCode) {
+        SecureCode = secureCode;
+    }
+
+    public User(String name, String password, String SecureCode) {
         Name = name;
         Password = password;
         IsStaff = "false";
+        this.SecureCode = SecureCode;
     }
 
     public String getName() {

@@ -26,6 +26,11 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="34sp"
+            app:met_baseColor="@color/white"
+            app:met_floatingLabel="highlight"
+            app:met_maxCharacters="11"
+            app:met_primaryColor="@color/white"
+            app:met_singleLineEllipsis="true"
             />
 
         <com.rengwuxian.materialedittext.MaterialEditText
@@ -38,6 +43,11 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="34sp"
+            app:met_baseColor="@color/white"
+            app:met_floatingLabel="highlight"
+            app:met_maxCharacters="11"
+            app:met_primaryColor="@color/white"
+            app:met_singleLineEllipsis="true"
             />
 
         <com.rengwuxian.materialedittext.MaterialEditText
@@ -45,11 +55,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
-            android:inputType="textPassword"
+            android:inputType="text"
             android:text="123456"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:textSize="34sp"/>
+            android:textSize="34sp"
+            app:met_baseColor="@color/white"
+            app:met_floatingLabel="highlight"
+            app:met_maxCharacters="11"
+            app:met_primaryColor="@color/white"
+            app:met_singleLineEllipsis="true"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtSecureCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="SecureCode"
+            android:inputType="text"
+            android:text="abc123"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="34sp"
+            app:met_baseColor="@color/white"
+            app:met_floatingLabel="highlight"
+            app:met_maxCharacters="11"
+            app:met_primaryColor="@color/white"
+            app:met_singleLineEllipsis="true"/>
 
     </LinearLayout>
 

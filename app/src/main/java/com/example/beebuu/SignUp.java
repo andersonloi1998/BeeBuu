@@ -21,7 +21,7 @@ import info.hoang8f.widget.FButton;
 
 public class SignUp extends AppCompatActivity {
 
-    MaterialEditText edtPhone,edtName,edtPassword;
+    MaterialEditText edtPhone,edtName,edtPassword,edtSecureCode;
     FButton btnSignUp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,7 @@ public class SignUp extends AppCompatActivity {
         edtName = (MaterialEditText) findViewById(R.id.edtName);
         edtPassword = (MaterialEditText) findViewById(R.id.edtPassword);
         edtPhone = (MaterialEditText) findViewById(R.id.edtPhone);
+        edtSecureCode = (MaterialEditText)findViewById(R.id.edtSecureCode);
 
         btnSignUp = (FButton) findViewById(R.id.btnSignUp);
 
@@ -58,7 +59,9 @@ public class SignUp extends AppCompatActivity {
                             else
                             {
                                 mDialog.dismiss();
-                                User user = new User(edtName.getText().toString(),edtPassword.getText().toString());
+                                User user = new User(edtName.getText().toString(),
+                                        edtPassword.getText().toString(),
+                                        edtSecureCode.getText().toString());
                                 table_user.child(edtPhone.getText().toString()).setValue(user);
                                 Toast.makeText(SignUp.this,"SignUp Success !!!",Toast.LENGTH_SHORT).show();
                                 finish();
