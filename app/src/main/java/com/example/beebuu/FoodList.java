@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.beebuu.Common.Common;
 import com.example.beebuu.Interface.ItemClickListener;
 import com.example.beebuu.Model.Category;
 import com.example.beebuu.Model.Food;
@@ -67,7 +68,13 @@ public class FoodList extends AppCompatActivity {
             categoryId=getIntent().getStringExtra("CategoryId");
         if(!categoryId.isEmpty()&&categoryId!=null)
         {
-            loadListFood(categoryId);
+            if(Common.isConnectedToInternet(getBaseContext()))
+                loadListFood(categoryId);
+            else
+            {
+                Toast.makeText(FoodList.this,"Please check your internet connection",Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
 
         //Search
@@ -172,7 +179,7 @@ public class FoodList extends AppCompatActivity {
                 R.layout.food_item,
                 FoodViewHolder.class,
                 foodList.orderByChild("menuId").equalTo(categoryId))
-            //like: select * from foods where menuId = x
+                //like: select * from foods where menuId = x
         {
             @Override
             protected void populateViewHolder(FoodViewHolder foodViewHolder, Food food, int i) {
@@ -192,7 +199,6 @@ public class FoodList extends AppCompatActivity {
                 });
             }
         };
-
         recyclerView.setAdapter(adapter);
     }
 }

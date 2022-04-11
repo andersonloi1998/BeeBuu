@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.example.beebuu.Common.Common;
 import com.example.beebuu.Database.Database;
 import com.example.beebuu.Model.Food;
 import com.example.beebuu.Model.Order;
@@ -78,7 +79,13 @@ public class FoodDetail extends AppCompatActivity {
         if(getIntent()!=null)
             foodId=getIntent().getStringExtra("FoodId");
         if(!foodId.isEmpty()){
-            getDetailFood(foodId);
+            if(Common.isConnectedToInternet(this))
+                getDetailFood(foodId);
+            else
+            {
+                Toast.makeText(FoodDetail.this,"Please check your internet connection",Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
 
     }

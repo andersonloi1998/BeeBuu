@@ -3,11 +3,12 @@ package com.example.beebuu;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.beebuu.Common.Common;
 import com.example.beebuu.Model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,27 +40,41 @@ public class SignUp extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                table_user.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                        //Check if already user phone
-                        if(datasnapshot.child(edtPhone.getText().toString()).exists()){
-                            Toast.makeText(SignUp.this,"Phone Number Already Used!!!",Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
-                            User user = new User(edtName.getText().toString(),edtPassword.getText().toString());
-                            table_user.child(edtPhone.getText().toString()).setValue(user);
-                            Toast.makeText(SignUp.this,"SignUp Success !!!",Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                if(Common.isConnectedToInternet(getBaseContext())){
 
-                    }
-                });
+                    final ProgressDialog mDialog = new ProgressDialog(SignUp.this);
+                    mDialog.setMessage("Please wait");
+                    mDialog.show();
+
+                    table_user.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                            //Check if already user phone
+                            if(datasnapshot.child(edtPhone.getText().toString()).exists()){
+                                mDialog.dismiss();
+                                Toast.makeText(SignUp.this,"Phone Number Already Used!!!",Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                mDialog.dismiss();
+                                User user = new User(edtName.getText().toString(),edtPassword.getText().toString());
+                                table_user.child(edtPhone.getText().toString()).setValue(user);
+                                Toast.makeText(SignUp.this,"SignUp Success !!!",Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+                else{
+                    Toast.makeText(SignUp.this,"Please check your internet connection",Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
         });
     }

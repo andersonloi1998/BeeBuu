@@ -2,6 +2,7 @@ package com.example.beebuu.Common;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.Network;
 import android.net.NetworkInfo;
 
 import com.example.beebuu.Model.User;
@@ -28,7 +29,9 @@ public class Common {
             NetworkInfo[] info = connectivityManager.getAllNetworkInfo();
 
             if(info != null){
-                for(int i=0;i<info.length;){
+                for(int i=0;i<info.length;i++)
+                {
+                    if(info[i].getState() == NetworkInfo.State.CONNECTED)
                     return true;
                 }
             }
